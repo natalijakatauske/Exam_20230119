@@ -1,0 +1,80 @@
+1. Employee.php yra base klasė. Employee class reikalavimai:
+
+- klase turi turėti constantą EMPLOYEE_TYPE su verte 1. [0.25 balo]
+- klasė turi turėti 4 skirtintas propertis: [0.5 balo]
+-- public name
+-- protected salary
+-- protected experience
+-- private id.
+- klasės konstruktorius turi priimti name ir salary. ir Id verte konstruktoriuje turi būti nustatyta rand():
+https://www.php.net/manual/en/function.rand.php [0.5 balo]
+
+- Getter ir Setter turi būti sukurtas experience properčiui. [0.25 balo]
+- Getter methodas turi būti sukurtas id properčiui [0.25 balo]
+- Metodas public calculateSalary() turi grąžinti salary reikšmę [0.5 balo]
+- Magic methodas toString turi grąžinti string: "Darbuotojas {id}: {name} - {salary} EUR" [0.25 balo]
+- Magic methodas clone turi pakeisti id verte į 0 [0.25 balo]
+- static methodas getTypeDescription() gražina string "Darbuotojo tipas {constantos verte}" [0.5 balo]
+
+
+Intern.php turi extendinti Employee klasę ir viskas: [0.25 balo]
+
+Manager.php turi extendinti Employee klasę: [1 balas]
+- constantos EMPLOYEE_TYPE reksme turi būti 2.
+- papildomas propertis owertimeHours
+- construktorius turi priimti dar papildomai owertimeHours, nepamirškite extendinti ir parent construktoriaus;
+- Perrašykite calculateSalary() funkciją. Suskaičiuokite atlyginima: salary + (salary / 40 *  owertimeHours) * 2;
+
+
+Sukurkite Intern ir Manager objektus.    [0.5 balo]
+Išspausdinkite tiesiogiai abu objektus
+Išveskite jų atlyginimus.
+Išveskite getTypeDescription;
+Paklonuokite intern sukurtą objektą
+
+
+2. Dependency invertion principle užduotis
+2.1. Sukurkite CinemaTicket class [1 balas]
+    - filmo pavadinimas: string
+    - vieta: string
+    - seanso data: Datetime
+    - kaina: float
+    - constructorius turi priimti visus properčius
+
+
+2.2. Sukurkite TotalCalculatorInterface. [0.5 balo]
+    - Kuris turėtų metodą calculatePrice.
+
+
+2.3. Realizuokite 3 skirtingus Kainos skaičiavimus: [1.5 balo]
+    - standartinis -> praeina per visus ticketus ir sudeda ju kainą
+    - su subscriberio nuolaida -> praiena per visus ticketus, sudeda ju suma ir taiko  10% nuolaida
+    - naujo vartotojo nuolaida -> praeina per visus ticket, taiko nuolaida tik pirmam itemui 20%
+
+    Siūlomi klasių pavadinimai:
+
+    - StandardPriceCalculator;
+    - SubscriberPriceCalculator;
+    - NewCustomerPriceCalculator;
+
+2.4. Sukurkite klasę OrderProcessor: [1 balas]
+    turi savyje properčius:
+        - items: CinemaTicket[]
+        - calculator;
+    turi metodus:
+        - addItem(CinemaTicket $ticket)
+        - getList() // grąžina items masyvą
+        - calculatePrice(): float;
+    Per construktorių yra paduodamas calculatorius!
+
+
+2.5. Sukurkite 3 CinemaTicket su kainomis: [1 balas]
+    1=> 10 EUR; 2=> 14 EUR; 3=> 8 EUR
+
+    Sukurkite 3 Skaičiavimo strategijų objektus
+    Sukurkite 3 OrderProcessor objektus ir pabandykite sudėti jiems visiems šiuo itemus naudodami addItem bei pritaikyti skirtingas skaičiavimo strategijas.
+    Išveskite kiekvieno OrderioProcessor total kainą.
+
+Pastebėjimai:
+    - Klasės ir interface turi gyvuoti atskiruose failuose.
+    - Turi būti naudojami namespace ir composer autoloaderis [PAPILDOMAI + 1 balas]
