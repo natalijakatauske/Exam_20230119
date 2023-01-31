@@ -69,9 +69,9 @@ class NewCustomerPriceCalculator implements TotalCalculatorInterface
 class OrderProcessor
 {
     private array $items = [];
-    private float $calculator;
+    private TotalCalculatorInterface $calculator;
 
-    public function __construct(float $calculator)
+    public function __construct(TotalCalculatorInterface $calculator)
     {
 
         $this->calculator = $calculator;
